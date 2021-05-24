@@ -68,5 +68,12 @@ namespace Geerten.MovementLib.Movement
 
         public virtual void TurnRight(Direction amount) => this.Heading += amount;
         public virtual void TurnRight(radian amount) => TurnRight(Direction.FromRadian(amount));
+
+
+        public void UpdateLocation(Func<ILocation, vector, ILocation> updateFunction)
+        {
+            this.Location = updateFunction(this.Location, this.Movement);
+        }
+        public void UpdateLocation() => UpdateLocation((loc, mov) => new FixedLocation(loc, mov));
     }
 }
