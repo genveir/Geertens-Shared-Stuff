@@ -12,6 +12,7 @@
   <ItemGroup>
     <None Include="MovementLib.jpg">
       <Pack>True</Pack>
+      <PackagePath></PackagePath>
     </None>
   </ItemGroup>
 
