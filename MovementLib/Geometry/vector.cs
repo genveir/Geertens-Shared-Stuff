@@ -47,6 +47,11 @@ namespace Geerten.MovementLib.Geometry
             this.Distance = Distance.Calculate(FixedLocation.Zero, location);
         }
 
+        public static vector operator -(vector vector)
+        {
+            return new vector(-vector.XOffset, -vector.YOffset);
+        }
+
         public static vector operator +(vector first, vector second)
         {
             return new vector(first.XOffset + second.XOffset, first.YOffset + second.YOffset);

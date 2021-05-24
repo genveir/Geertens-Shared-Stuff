@@ -38,6 +38,11 @@ namespace Geerten.MovementLib.Geometry
             return new Distance(hypot);
         }
 
+        public static Distance operator -(Distance distance)
+        {
+            return new Distance(-distance.Value);
+        }
+
         public static Distance operator +(Distance first, Distance second)
         {
             return new Distance(first.Value + second.Value);

@@ -35,6 +35,11 @@ namespace Geerten.MovementLib.Geometry
             return new radian(value);
         }
 
+        public static radian operator -(radian radian)
+        {
+            return new radian(radian.value + Math.PI);
+        }
+
         public static radian operator +(radian first, radian second)
         {
             return new radian(first.value + second.value);

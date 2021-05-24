@@ -9,7 +9,7 @@ namespace Geerten.MovementLib.Geometry
 {
     public class Direction
     {
-        public static Direction Zero = new Direction(0);
+        public static readonly Direction Zero = new Direction(0);
 
         private radian _inRadians;
 
@@ -68,6 +68,11 @@ namespace Geerten.MovementLib.Geometry
             var heading = Calculate(fromHeading.Location, to);
 
             return heading - fromHeading.Heading;
+        }
+
+        public static Direction operator -(Direction direction)
+        {
+            return Direction.FromRadian(-direction.InRadians);
         }
 
         public static Direction operator +(Direction directionOne, Direction directionTwo)
