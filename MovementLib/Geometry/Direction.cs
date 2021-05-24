@@ -9,7 +9,7 @@ namespace Geerten.MovementLib.Geometry
 {
     public class Direction
     {
-        public static readonly Direction Zero = new Direction(0);
+        public static readonly Direction Zero = new Direction(0.0d);
 
         private radian _inRadians;
 
@@ -22,12 +22,17 @@ namespace Geerten.MovementLib.Geometry
         public double InDegrees
         {
             get { return _inRadians.toDouble() / Math.PI * 180.0d; }
-            private set { _inRadians = value / 180.0d * Math.PI; }
         }
 
         private Direction(radian inRadians)
         {
             this.InRadians = inRadians;
+        }
+        private Direction(double radians) :this(new radian(radians)) { }
+
+        public Direction Absolute()
+        {
+            return new Direction(this.InRadians.Absolute());
         }
 
         public static Direction FromRadian(radian value)
@@ -37,37 +42,16 @@ namespace Geerten.MovementLib.Geometry
 
         public static Direction FromDegrees(double degrees)
         {
-            return new Direction(degrees / 180.0d * Math.PI);
+            return new Direction(new radian(degrees / 180.0d * Math.PI));
         }
 
-        public static Direction FromCirclePortion(double portion)
-        {
-            return new Direction(portion * 2 * Math.PI);
-        }
-
-        public static implicit operator radian(Direction dir)
-        {
-            return dir.InRadians;
-        }
-
-        public static implicit operator Direction(radian value)
-        {
-            return Direction.FromRadian(value);
-        }
-
+        // 0 should be straight up, so positive Y
         public static Direction Calculate(ILocation from, ILocation to)
         {
             double deltaX = to.X - from.X;
             double deltaY = to.Y - from.Y;
 
-            return Direction.FromRadian(Math.Atan2(deltaX, deltaY));
-        }
-
-        public static Direction CalculateBearing(IBodyWithHeading fromHeading, ILocation to)
-        {
-            var heading = Calculate(fromHeading.Location, to);
-
-            return heading - fromHeading.Heading;
+            return Direction.FromRadian(new radian(Math.Atan2(deltaX, deltaY)));
         }
 
         public static Direction operator -(Direction direction)
@@ -83,6 +67,52 @@ namespace Geerten.MovementLib.Geometry
         public static Direction operator -(Direction directionOne, Direction directionTwo)
         {
             return Direction.FromRadian(directionOne.InRadians - directionTwo.InRadians);
+        }
+
+        public static bool operator ==(Direction? directionOne, Direction? directionTwo)
+        {
+            var oneIsNull = ReferenceEquals(directionOne, null);
+            var twoIsNull = ReferenceEquals(directionTwo, null);
+
+#nullable disable // linter is wrong, one and two cannot be null on line 89
+            if (oneIsNull && twoIsNull) return true;
+            else if (oneIsNull || twoIsNull) return false;
+            else return directionOne._inRadians == directionTwo._inRadians;
+#nullable enable
+        }
+
+        public static bool operator !=(Direction? directionOne, Direction? directionTwo)
+        {
+            return !(directionOne == directionTwo);
+        }
+
+        public override int GetHashCode()
+        {
+            return _inRadians.GetHashCode();
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (ReferenceEquals(this, obj)) return true;
+
+            var other = obj as Direction;
+            if (other == null) return false;
+
+            return other._inRadians == this._inRadians;
+        }
+
+        public bool DifferenceLessThan(Direction other, radian allowedDifference)
+        {
+            var difference = (this - other).Absolute();
+
+            return difference.InRadians < allowedDifference;
+        }
+
+        public bool DifferenceLessThan(Direction other, double degreesDifferenceAllowed)
+        {
+            var difference = (this - other).Absolute();
+
+            return difference.InDegrees < degreesDifferenceAllowed;
         }
 
         public override string ToString()

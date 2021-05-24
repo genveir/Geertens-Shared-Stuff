@@ -30,9 +30,10 @@ namespace Geerten.MovementLib.Geometry
             return value;
         }
 
-        public static implicit operator radian(double value)
+        public radian Absolute() // returns distance to 0
         {
-            return new radian(value);
+            if (value > Math.PI) return new radian(TAU - value);
+            else return new radian(value);
         }
 
         public static radian operator -(radian radian)
@@ -73,6 +74,29 @@ namespace Geerten.MovementLib.Geometry
         public static bool operator >(radian first, radian second)
         {
             return first.value > second.value;
+        }
+
+        public static bool operator ==(radian first, radian second)
+        {
+            return first.value == second.value;
+        }
+
+        public static bool operator !=(radian first, radian second)
+        {
+            return !(first == second);
+        }
+
+        public override int GetHashCode()
+        {
+            return value.GetHashCode();
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (ReferenceEquals(obj, null)) return false;
+
+            var other = (radian)obj;
+            return this.value == other.value;
         }
 
         public override string ToString()
