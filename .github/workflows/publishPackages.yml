@@ -1,0 +1,31 @@
+name: Build and push NuGet packages
+
+on:
+  release:
+    types: [ published ]
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  publishClient:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.x'
+
+    - name: Build
+      run: dotnet build --configuration Release
+
+    - name: Run tests
+      run: dotnet test
+
+    - name: Pack MovementLib
+      run: dotnet pack ./MovementLib/Geerten.MovementLib.csproj --configuration Release --output .
+
+    - name: Push to Github
+      run: dotnet nuget push *.nupkg --source ${{ secrets.NUGET_URL }} --api-key ${{secrets.GITHUB_TOKEN}} --skip-duplicate
