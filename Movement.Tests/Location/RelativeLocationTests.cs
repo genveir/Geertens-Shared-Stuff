@@ -56,5 +56,17 @@ namespace Geerten.Movement.Location
             Assert.Equal(30, loc.X);
             Assert.Equal(35, loc.Y);
         }
+
+        [Fact]
+        public void CanStackRelativeLocations()
+        {
+            var baseLoc = new MovableLocation(10, 5);
+
+            var firstRelative = new RelativeLocation(baseLoc, 10, 20);
+            var secondRelative = new RelativeLocation(firstRelative, 15, 25);
+
+            Assert.Equal(35, secondRelative.X);
+            Assert.Equal(50, secondRelative.Y);
+        }
     }
 }
