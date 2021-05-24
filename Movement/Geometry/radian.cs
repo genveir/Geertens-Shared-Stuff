@@ -55,11 +55,7 @@ namespace Geerten.Movement.Geometry
         {
             return new radian(first * second.value);
         }
-
-        public static radian operator *(radian first, double second)
-        {
-            return new radian(first.value * second);
-        }
+        public static radian operator *(radian first, double second) => second * first;
 
         public static radian operator /(radian first, double second)
         {
