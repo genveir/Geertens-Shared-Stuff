@@ -21,7 +21,7 @@ namespace Geerten.MovementLib.Movement
                 if (bodyBehavior.MaximumSpeed != null)
                 {
                     var overspeed = _movement.Distance - bodyBehavior.MaximumSpeed;
-                    if (overspeed > Distance.Zero) _movement += new vector(_movement.Direction, -_movement.Distance);
+                    if (overspeed > Distance.Zero) DecelerateAlongBearing(overspeed);
                 }
             }
         }
