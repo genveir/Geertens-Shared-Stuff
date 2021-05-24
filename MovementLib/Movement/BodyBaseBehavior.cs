@@ -12,7 +12,7 @@ namespace Geerten.MovementLib.Movement
         /// <summary>
         /// Movement vector distance will be limited to this speed
         /// </summary>
-        public Distance MaximumSpeed;
+        public Distance? MaximumSpeed;
 
         /// <summary>
         /// A bodybasebehavior with null as the value of all parameters
@@ -29,7 +29,7 @@ namespace Geerten.MovementLib.Movement
         /// Some parameters for the behavior of the body base
         /// </summary>
         /// <param name="maximumSpeed">Maximum speed, set to null to leave unlimited</param>
-        public BodyBaseBehavior(Distance maximumSpeed)
+        public BodyBaseBehavior(Distance? maximumSpeed)
         {
             this.MaximumSpeed = maximumSpeed;
         }

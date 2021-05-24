@@ -68,7 +68,7 @@ namespace Geerten.MovementLib.Geometry
             return string.Format("Distance: {0}", Value);
         }
 
-        public int CompareTo(object obj)
+        public int CompareTo(object? obj)
         {
             if (obj is Distance)
             {
