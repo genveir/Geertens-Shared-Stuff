@@ -18,18 +18,11 @@ namespace Geerten.Movement.Geometry
             this.X = X;
             this.Y = Y;
         }
-
-        public FixedLocation(ILocation location, Direction direction, Distance distance)
-        {
-            this.X = (long)(Math.Sin(direction.InRadians.toDouble()) * distance) + location.X;
-            this.Y = (long)(Math.Cos(direction.InRadians.toDouble()) * distance) + location.Y;
-        }
-
-        public FixedLocation(ILocation startingPoint, vector difference)
-        {
-            this.X = startingPoint.X + difference.XOffset;
-            this.Y = startingPoint.Y + difference.YOffset;
-        }
+        public FixedLocation(ILocation startingPoint, vector difference) : this(
+            startingPoint.X + difference.XOffset,
+            startingPoint.Y + difference.YOffset
+        ) { }
+        public FixedLocation(ILocation location, Direction direction, Distance distance) : this(location, new vector(direction, distance)) { }
 
         public override string ToString()
         {

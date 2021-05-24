@@ -33,7 +33,7 @@ namespace Geerten.Movement.Geometry
 
             var result = Distance.Calculate(loc1, loc2);
 
-            Assert.Equal(0.0d, result, 6);
+            Assert.Equal(0.0d, result.Value, 6);
         }
 
         [Theory]
@@ -50,7 +50,7 @@ namespace Geerten.Movement.Geometry
 
             var distance = CalculatePythagoras(xVal1, yVal1, xVal2, yVal2);
 
-            Assert.Equal(distance, result, 6);
+            Assert.Equal(distance, result.Value, 6);
         }
 
         [Theory]
@@ -67,7 +67,7 @@ namespace Geerten.Movement.Geometry
 
             var distance = CalculatePythagoras(xVal1, yVal1, xVal2, yVal2);
 
-            Assert.Equal(distance, result, 6);
+            Assert.Equal(distance, result.Value, 6);
         }
 
         [Fact]
@@ -80,7 +80,7 @@ namespace Geerten.Movement.Geometry
 
             var correctAnswer = Math.Sqrt(2) * long.MaxValue / 2;
 
-            Assert.Equal(correctAnswer, result, 6);
+            Assert.Equal(correctAnswer, result.Value, 6);
         }
 
         [Fact]
@@ -114,7 +114,7 @@ namespace Geerten.Movement.Geometry
         {
             var product = new Distance(1000.0d) * new Distance(123.456d);
 
-            Assert.Equal(123456.0d, product);
+            Assert.Equal(123456.0d, product.Value);
         }
 
         [Fact]
@@ -122,7 +122,7 @@ namespace Geerten.Movement.Geometry
         {
             var quotient = new Distance(654321.0d) / new Distance(1000.0d);
 
-            Assert.Equal(654.321d, quotient);
+            Assert.Equal(654.321d, quotient.Value);
         }
 
         [Fact]

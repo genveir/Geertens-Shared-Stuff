@@ -17,11 +17,6 @@ namespace Geerten.Movement.Geometry
             Value = value;
         }
 
-        public static implicit operator double(Distance dist)
-        {
-            return dist.Value;
-        }
-
         public static Distance Calculate(ILocation locationOne, ILocation locationTwo)
         {
             long XLeg = locationOne.X - locationTwo.X;
@@ -61,6 +56,26 @@ namespace Geerten.Movement.Geometry
         public static Distance operator /(Distance first, Distance second)
         {
             return new Distance(first.Value / second.Value);
+        }
+
+        public static bool operator >(Distance first, Distance second)
+        {
+            return first.Value > second.Value;
+        }
+
+        public static bool operator <(Distance first, Distance second)
+        {
+            return first.Value < second.Value;
+        }
+
+        public static bool operator <=(Distance first, Distance second)
+        {
+            return first.Value <= second.Value;
+        }
+
+        public static bool operator >=(Distance first, Distance second)
+        {
+            return first.Value >= second.Value;
         }
 
         public static bool operator ==(Distance? first, Distance? second)
@@ -104,7 +119,7 @@ namespace Geerten.Movement.Geometry
         public bool Equals(Distance other, int precision)
         {
             var roundedValue = Math.Round(Value, precision);
-            var otherValue = Math.Round(other, precision);
+            var otherValue = Math.Round(other.Value, precision);
 
             return roundedValue == otherValue;
         }

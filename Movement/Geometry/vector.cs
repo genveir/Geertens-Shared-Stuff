@@ -10,11 +10,11 @@ namespace Geerten.Movement.Geometry
     {
         public static vector Zero = new vector(0, 0);
 
-        public long XOffset { get; set; }
-        public long YOffset { get; set; }
+        public readonly long XOffset { get; }
+        public readonly long YOffset { get; }
 
-        public Direction Direction { get; }
-        public Distance Distance { get; }
+        public readonly Direction Direction { get; }
+        public readonly Distance Distance { get; }
 
         public vector(long XOffset, long YOffset)
         {
@@ -32,19 +32,8 @@ namespace Geerten.Movement.Geometry
             this.Direction = direction;
             this.Distance = distance;
 
-            var vectorLoc = new FixedLocation(FixedLocation.Zero, Direction, Distance);
-
-            this.XOffset = vectorLoc.X;
-            this.YOffset = vectorLoc.Y;
-        }
-
-        public vector(ILocation location)
-        {
-            this.XOffset = location.X;
-            this.YOffset = location.Y;
-
-            this.Direction = Direction.Calculate(FixedLocation.Zero, location);
-            this.Distance = Distance.Calculate(FixedLocation.Zero, location);
+            this.XOffset = (long)(Math.Sin(direction.InRadians.toDouble()) * distance.Value);
+            this.YOffset = (long)(Math.Cos(direction.InRadians.toDouble()) * distance.Value);
         }
 
         public static vector operator -(vector vector)
@@ -71,23 +60,38 @@ namespace Geerten.Movement.Geometry
         {
             return new vector(vector.XOffset * multiplier, vector.YOffset * multiplier);
         }
-        public static vector operator *(long multiplier, vector vector)
+        public static vector operator *(long multiplier, vector vector) => vector * multiplier;
+        public static vector operator *(vector vector, double multiplier) => vector * (long)multiplier;
+        public static vector operator *(double multiplier, vector vector) => vector * (long)multiplier;
+
+        public static bool operator ==(vector first, vector second)
         {
-            return new vector(vector.XOffset * multiplier, vector.YOffset * multiplier);
+            return first.XOffset == second.XOffset &&
+                first.YOffset == second.YOffset;
         }
 
-        public static vector operator *(vector vector, double multiplier)
+        public static bool operator !=(vector first, vector second)
         {
-            return new vector((long)(vector.XOffset * multiplier), (long)(vector.YOffset * multiplier));
-        }
-        public static vector operator *(double multiplier, vector vector)
-        {
-            return new vector((long)(vector.XOffset * multiplier), (long)(vector.YOffset * multiplier));
+            return !(first == second);
         }
 
         public static vector Calculate(ILocation from, ILocation to)
         {
-            return new vector(new FixedLocation(to.X - from.X, to.Y - from.Y));
+            return new vector(to.X - from.X, to.Y - from.Y);
+        }
+
+        public override int GetHashCode()
+        {
+            return XOffset.GetHashCode() + YOffset.GetHashCode();
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (ReferenceEquals(obj, null)) return false;
+
+            var other = (vector)obj;
+            return this.XOffset == other.XOffset &&
+                this.YOffset == other.YOffset;
         }
 
         public override string ToString()
