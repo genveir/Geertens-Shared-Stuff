@@ -8,7 +8,7 @@ namespace Geerten.MovementLib.Geometry
 {
     public class Distance : IComparable
     {
-        public static Distance Zero = new Distance(0);
+        public static Distance Zero = new Distance(0.0d);
 
         public double Value { get; set; }
 
@@ -63,9 +63,50 @@ namespace Geerten.MovementLib.Geometry
             return new Distance(first.Value / second.Value);
         }
 
+        public static bool operator ==(Distance? first, Distance? second)
+        {
+            var firstIsNull = ReferenceEquals(first, null);
+            var secondIsNull = ReferenceEquals(second, null);
+
+#nullable disable // linter is wrong, first and second cannot be null on line 74
+            if (firstIsNull && secondIsNull) return true;
+            else if (firstIsNull || secondIsNull) return false;
+            else return first.Value == second.Value;
+#nullable enable
+        }
+
+        public static bool operator !=(Distance? first, Distance? second)
+        {
+            return !(first == second);
+        }
+
         public override string ToString()
         {
             return string.Format("Distance: {0}", Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return (int)Value;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (ReferenceEquals(this, obj)) return true;
+#nullable disable
+            var other = obj as Distance;
+
+            if (other == null) return false;
+#nullable enable
+            return other.Value == this.Value;
+        }
+
+        public bool Equals(Distance other, int precision)
+        {
+            var roundedValue = Math.Round(Value, precision);
+            var otherValue = Math.Round(other, precision);
+
+            return roundedValue == otherValue;
         }
 
         public int CompareTo(object? obj)
