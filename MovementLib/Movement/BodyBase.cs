@@ -12,10 +12,10 @@ namespace Geerten.MovementLib.Movement
         private BodyBaseBehavior bodyBehavior;
 
         private vector _movement;
-        public vector Movement
+        public virtual vector Movement
         {
             get => _movement;
-            private set
+            protected set
             {
                 _movement = value;
                 if (bodyBehavior.MaximumSpeed != null)
@@ -26,11 +26,11 @@ namespace Geerten.MovementLib.Movement
             }
         }
 
-        public ILocation Location { get; private set; }
+        public virtual ILocation Location { get; protected set; }
 
-        public Direction Heading { get; private set; }
+        public virtual Direction Heading { get; protected set; }
 
-        public Direction Bearing => Movement.Direction;
+        public virtual Direction Bearing => Movement.Direction;
 
         public BodyBase(ILocation location, BodyBaseBehavior behavior, Direction heading, vector movement)
         {
@@ -52,21 +52,21 @@ namespace Geerten.MovementLib.Movement
         public BodyBase(ILocation location, Direction bearing, Distance speed) : this(location, BodyBaseBehavior.Default, bearing, new vector(bearing, speed)) { }
         public BodyBase(ILocation location, Direction heading, Direction bearing, Distance speed) : this(location, BodyBaseBehavior.Default, heading, new vector(bearing, speed)) { }
 
-        public void Accelerate(vector accelerationVector)
+        public virtual void Accelerate(vector accelerationVector)
         {
             this.Movement = this.Movement + accelerationVector;
         }
-        public void Accelerate(Direction direction, Distance amount) => Accelerate(new vector(direction, amount));
-        public void AccelerateAlongBearing(Distance amount) => Accelerate(Bearing, amount);
-        public void AccelerateAlongHeading(Distance amount) => Accelerate(Heading, amount);
+        public virtual void Accelerate(Direction direction, Distance amount) => Accelerate(new vector(direction, amount));
+        public virtual void AccelerateAlongBearing(Distance amount) => Accelerate(Bearing, amount);
+        public virtual void AccelerateAlongHeading(Distance amount) => Accelerate(Heading, amount);
 
-        public void DecelerateAlongBearing(Distance amount) => Accelerate(Bearing, -amount);
-        public void DecelerateAlongHeading(Distance amount) => Accelerate(Heading, -amount);
+        public virtual void DecelerateAlongBearing(Distance amount) => Accelerate(Bearing, -amount);
+        public virtual void DecelerateAlongHeading(Distance amount) => Accelerate(Heading, -amount);
 
-        public void TurnLeft(Direction amount) => this.Heading -= amount;
-        public void TurnLeft(radian amount) => TurnLeft(Direction.FromRadian(amount));
+        public virtual void TurnLeft(Direction amount) => this.Heading -= amount;
+        public virtual void TurnLeft(radian amount) => TurnLeft(Direction.FromRadian(amount));
 
-        public void TurnRight(Direction amount) => this.Heading += amount;
-        public void TurnRight(radian amount) => TurnRight(Direction.FromRadian(amount));
+        public virtual void TurnRight(Direction amount) => this.Heading += amount;
+        public virtual void TurnRight(radian amount) => TurnRight(Direction.FromRadian(amount));
     }
 }
