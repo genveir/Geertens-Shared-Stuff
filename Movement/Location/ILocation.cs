@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Geerten.Movement.Geometry
+namespace Geerten.Movement.Location
 {
     public interface ILocation
     {

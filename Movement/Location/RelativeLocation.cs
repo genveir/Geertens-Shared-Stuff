@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Geerten.Movement.Geometry;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Geerten.Movement.Geometry
+namespace Geerten.Movement.Location
 {
     public class RelativeLocation : ILocation
     {
