@@ -14,6 +14,9 @@ namespace Geerten.MovementLib.Movement
         /// </summary>
         public Distance MaximumSpeed;
 
+        /// <summary>
+        /// A bodybasebehavior with null as the value of all parameters
+        /// </summary>
         public static BodyBaseBehavior Default
         {
             get
@@ -22,6 +25,10 @@ namespace Geerten.MovementLib.Movement
             }
         }
 
+        /// <summary>
+        /// Some parameters for the behavior of the body base
+        /// </summary>
+        /// <param name="maximumSpeed">Maximum speed, set to null to leave unlimited</param>
         public BodyBaseBehavior(Distance maximumSpeed)
         {
             this.MaximumSpeed = maximumSpeed;
