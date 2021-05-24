@@ -9,7 +9,7 @@ namespace Geerten.MovementLib.Movement
 {
     public abstract class BodyBase : IBodyWithHeading, IMovingBody
     {
-        private BodyBaseBehavior bodyBehavior;
+        protected BodyBaseBehavior bodyBehavior;
 
         private vector _movement;
         public virtual vector Movement
@@ -20,8 +20,8 @@ namespace Geerten.MovementLib.Movement
                 _movement = value;
                 if (bodyBehavior.MaximumSpeed != null)
                 {
-                    var overspeed = _movement.Distance - bodyBehavior.MaximumSpeed;
-                    if (overspeed > Distance.Zero) DecelerateAlongBearing(overspeed);
+                    if (_movement.Distance > bodyBehavior.MaximumSpeed) _movement = 
+                            new vector(_movement.Direction, bodyBehavior.MaximumSpeed);
                 }
             }
         }
