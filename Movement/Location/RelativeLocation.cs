@@ -17,6 +17,10 @@ namespace Geerten.Movement.Location
             _originLocation = originLocation;
             _offset = offset;
         }
+        public RelativeLocation(ILocation originLocation, long XOffset, long YOffset) 
+            : this(originLocation, new vector(XOffset, YOffset)) { }
+        public RelativeLocation(ILocation originLocation, Direction direction, Distance distance) 
+            : this(originLocation, new vector(direction, distance)) { }
 
         public long X
         {

@@ -197,18 +197,5 @@ namespace Geerten.Movement.Bodies
         /// </summary>
         /// <param name="amount">How much the body should be turned</param>
         public virtual void TurnRight(radian amount) => TurnRight(Direction.FromRadian(amount));
-
-        /// <summary>
-        /// Sets a new Location based on an update function.
-        /// </summary>
-        /// <param name="updateFunction">Location will be set to the result of this function with Location and Movement as parameters</param>
-        public void UpdateLocation(Func<ILocation, vector, ILocation> updateFunction)
-        {
-            this.Location = updateFunction(this.Location, this.Movement);
-        }
-        /// <summary>
-        /// Sets a new FixedLocation based on current Location and Movement
-        /// </summary>
-        public void UpdateLocation() => UpdateLocation((loc, mov) => new FixedLocation(loc, mov));
     }
 }
