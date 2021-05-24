@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>Geerten.MovementLib</RootNamespace>
+    <RootNamespace>Geerten.Movement</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MovementLib\Geerten.MovementLib.csproj" />
+    <ProjectReference Include="..\Movement\Geerten.Movement.csproj" />
   </ItemGroup>
 
 </Project>

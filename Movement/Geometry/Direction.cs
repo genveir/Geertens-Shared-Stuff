@@ -1,11 +1,11 @@
-﻿using Geerten.MovementLib.Movement;
+﻿using Geerten.Movement.Bodies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Geerten.MovementLib.Geometry
+namespace Geerten.Movement.Geometry
 {
     public class Direction
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Geerten.MovementLib.Geometry
+namespace Geerten.Movement.Geometry
 {
     public struct vector
     {

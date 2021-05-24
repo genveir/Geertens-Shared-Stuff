@@ -5,16 +5,9 @@
 		<Version>0.0.5</Version>
 		<Authors>Geerten Vink</Authors>
 		<Description>Some movement helpers</Description>
-		<PackageIcon>MovementLib.jpg</PackageIcon>
+		<PackageIcon>Movement.jpg</PackageIcon>
 		<RepositoryUrl>https://github.com/genveir/Geertens-Shared-Stuff</RepositoryUrl>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<None Include="MovementLib.jpg">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-	</ItemGroup>
 
 </Project>

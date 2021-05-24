@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geerten.MovementLib", "MovementLib\Geerten.MovementLib.csproj", "{C64B688E-F0E8-4792-8467-30C0D89F0288}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geerten.Movement", "Movement\Geerten.Movement.csproj", "{C64B688E-F0E8-4792-8467-30C0D89F0288}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{1F771233-CD15-4D4E-B6B2-BE38A2B09D16}"
 	ProjectSection(SolutionItems) = preProject
@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\publishPackages.yml = .github\workflows\publishPackages.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geerten.MovementLib.Tests", "Geerten.MovementLib.Tests\Geerten.MovementLib.Tests.csproj", "{8E4B2370-7D3C-4462-9253-3E42FC42045B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geerten.MovementLib.Tests", "Movement.Tests\Geerten.MovementLib.Tests.csproj", "{8E4B2370-7D3C-4462-9253-3E42FC42045B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
